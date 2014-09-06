@@ -12,3 +12,43 @@ angular.module('ToDo', ['ionic'])
 		}
 	});
 })
+
+.controller('ToDoCtrl', function( $scope ){
+	$scope.tasks = [
+			{
+				title: 'Купить чайник',
+				description: 'Нужно обязательно купить синий',
+				status: 'new'
+			},
+			{
+				title: 'Выучить ангулар',
+				description: 'Есть еще парочка книг, которые стоит прочесть',
+				status: 'done'
+			},
+			{
+				title: 'Сходить в кино',
+				description: 'Говорят последний фильм про нрчных снайперов очень хорошо',
+				status: 'new'
+			},
+			{
+				title: 'Слетать в Амстердам',
+				description: 'В это время года Амстердам особенно хорош',
+				status: 'new'
+			}
+		];
+	$scope.isChecked = function ( item ) {
+		return item.status == 'done';
+	}
+	$scope.toggleChecked = function ( item ) {
+		item.status = item.status == 'new' ? 'done' : 'new';
+	}
+	$scope.deleteItem = function( item ) {
+		console.log('delete');
+	}
+	$scope.openTask = function ( item ) {
+		console.log (item);
+	}
+	$scope.addNewTask = function() {
+		console.log('addNewTask');
+	}
+})

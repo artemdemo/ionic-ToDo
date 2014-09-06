@@ -21,24 +21,30 @@
 		<!-- your app's js -->
 		<script src="js/app.js"></script>
 	</head>
-	<body ng-app="ToDo">
+	<body ng-app="ToDo" ng-controller="ToDoCtrl">
 
 		<ion-pane>
 
 			<ion-header-bar class="bar-positive">
 				<h1 class="title">ToDo</h1>
-				<button class="button icon ion-plus"></button>
+				<button class="button icon ion-plus" ng-click="addNewTask()"></button>
 			</ion-header-bar>
 
 			<ion-content>
 				<ion-list>
-					<ion-item ng-repeat="task in tasks">
-						{{task.title}}
+
+					<ion-item ng-repeat="task in tasks" class="item item-checkbox item-icon-right" ng-class="{'checked' : isChecked(task)}">
+						<label class="checkbox">
+							<input type="checkbox" ng-checked="isChecked(task)" ng-click="toggleChecked(task)">
+						</label>
+						<span class="title" ng-click="openTask(task)">{{task.title}}</span>
+						<i class="icon ion-close-circled deleteItem" ng-click="deleteItem(task)"></i>
 					</ion-item>
+
 				</ion-list>
 			</ion-content>
 
 		</ion-pane>
-		
+
 	</body>
 </html>
