@@ -13,7 +13,7 @@ angular.module('ToDo', ['ionic'])
 	});
 })
 
-.controller('ToDoCtrl', function( $scope ){
+.controller('ToDoCtrl', function( $scope,$ionicModal ){
 	$scope.tasks = [
 			{
 				title: 'Купить чайник',
@@ -36,19 +36,67 @@ angular.module('ToDo', ['ionic'])
 				status: 'new'
 			}
 		];
+
+	$scope.activeTask = {
+					title: '',
+					description: '',
+					status: 'new'
+				};
+
+	// Create and load the Modal
+	$ionicModal.fromTemplateUrl('views/task.html', function(modal) {
+			$scope.taskModal = modal;
+		},
+		{
+			scope: $scope,
+			animation: 'slide-in-right'
+		});
+
 	$scope.isChecked = function ( item ) {
 		return item.status == 'done';
 	}
+
 	$scope.toggleChecked = function ( item ) {
 		item.status = item.status == 'new' ? 'done' : 'new';
 	}
-	$scope.deleteItem = function( item ) {
-		console.log('delete');
+
+	$scope.deleteItem = function( id ) {
+		$scope.tasks.splice( id, 1 );
 	}
-	$scope.openTask = function ( item ) {
-		console.log (item);
+
+	$scope.openTask = function ( task ) {
+		console.log( task );
+		$scope.activeTask = {
+					title: task.title,
+					description: task.description,
+					status: 'new'
+				};
+		$scope.newTask = false;
+		$scope.taskModal.show();
 	}
+
 	$scope.addNewTask = function() {
-		console.log('addNewTask');
+		$scope.activeTask = {
+					title: '',
+					description: '',
+					status: 'new'
+				};
+		$scope.newTask = true;
+		$scope.taskModal.show();
+	}
+
+	$scope.closeTask = function() {
+		$scope.taskModal.hide();
+	}
+
+	$scope.submitTask = function(task) {
+		$scope.tasks.push({
+			title: task.title,
+			description: task.description,
+			status: 'new'
+		});
+		$scope.taskModal.hide();
+		task.title = "";
+		task.description = "";
 	}
 })

@@ -1,0 +1,30 @@
+<div class="modal">
+
+	<!-- Modal header bar -->
+	<ion-header-bar class="bar-secondary">
+		<h1 class="title" ng-show="newTask">Новая задача</h1>
+		<h1 class="title" ng-hide="newTask">Ред-ть задачу</h1>
+		<button class="button button-clear button-positive" ng-click="closeTask()">Отмена</button>
+	</ion-header-bar>
+
+	<!-- Modal content area -->
+	<ion-content>
+
+		<form ng-submit="submitTask(activeTask)">
+			<div class="list">
+				<label class="item item-input">
+					<input type="text" placeholder="Что нужно сделать?" ng-model="activeTask.title">
+				</label>
+				<label class="item item-input">
+					<textarea placeholder="Описание" ng-model="activeTask.description"></textarea>
+				</label>
+			</div>
+			<div class="padding">
+				<button type="submit" class="button button-block button-positive" ng-show="newTask">Создать задачу</button>
+				<button type="submit" class="button button-block button-positive" ng-hide="newTask">Сохранить задачу</button>
+			</div>
+		</form>
+
+	</ion-content>
+
+</div>
