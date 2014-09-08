@@ -6,6 +6,7 @@
 		<title></title>
 
 		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
 
 		<!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -16,7 +17,7 @@
 		<script src="lib/ionic/js/ionic.bundle.js"></script>
 
 		<!-- cordova script (this will be a 404 during development) -->
-		<!-- <script src="cordova.js"></script> -->
+		<script src="cordova.js"></script>
 
 		<!-- your app's js -->
 		<script src="js/app.js"></script>
@@ -33,7 +34,7 @@
 			<ion-content>
 				<ion-list>
 
-					<ion-item ng-repeat="task in tasks" class="item item-checkbox item-icon-right" ng-class="{'checked' : isChecked(task)}">
+					<ion-item ng-repeat="task in tasks" class="item item-checkbox item-icon-right animated" ng-class="{'checked' : isChecked(task)}">
 						<label class="checkbox">
 							<input type="checkbox" ng-checked="isChecked(task)" ng-click="toggleChecked(task)">
 						</label>

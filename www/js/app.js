@@ -1,4 +1,4 @@
-angular.module('ToDo', ['ionic'])
+angular.module('ToDo', ['ionic', 'ngAnimate'])
 
 .run(function($ionicPlatform) {
 	$ionicPlatform.ready(function() {
@@ -13,7 +13,7 @@ angular.module('ToDo', ['ionic'])
 	});
 })
 
-.controller('ToDoCtrl', function( $scope,$ionicModal ){
+.controller('ToDoCtrl', function( $scope, $ionicModal, $timeout ){
 	$scope.tasks = [
 			{
 				title: 'Купить чайник',
@@ -95,6 +95,7 @@ angular.module('ToDo', ['ionic'])
 			description: task.description,
 			status: 'new'
 		});
+
 		$scope.taskModal.hide();
 		task.title = "";
 		task.description = "";
