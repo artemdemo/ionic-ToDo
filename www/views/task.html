@@ -18,6 +18,19 @@
 				<label class="item item-input">
 					<textarea placeholder="Описание" ng-model="activeTask.description"></textarea>
 				</label>
+
+				<ul class="list">
+					<li class="item item-toggle">
+							<span class="toggle-item">Выполнена</span>
+							<label class="toggle toggle-positive">
+								<input type="checkbox" ng-model="activeTask.done">
+								<div class="track">
+									<div class="handle"></div>
+								</div>
+							</label>
+					</li>
+				</ul>
+
 			</div>
 			<div class="padding">
 				<button type="submit" class="button button-block button-positive" ng-show="newTask">Добавить</button>

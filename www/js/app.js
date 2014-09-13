@@ -16,38 +16,21 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 .controller('ToDoCtrl', function( $scope, $ionicModal, $timeout ){
 	/*
 	 * in English:
-	 * $scope.tasks = [ {	title: 'Buy teapot', description: 'The blue one please', status: 'new' },	{	title: 'Learn angular', description: 'There is some interesting stuff',	status: 'done' }, {	title: 'Go to the cinema', description: 'The guardians of the galaxy', status: 'new' } ];
+	 * $scope.tasks = [ {	title: 'Buy teapot', description: 'The blue one please', done: false },	{	title: 'Learn angular', description: 'There is some interesting stuff',	done: true }, {	title: 'Go to the cinema', description: 'The guardians of the galaxy', done: false } ];
 	 */
 
-	$scope.tasks = [
-			{
-				title: 'Купить чайник',
-				description: 'Нужно обязательно купить синий',
-				status: 'new'
-			},
-			{
-				title: 'Выучить ангулар',
-				description: 'Есть еще парочка книг, которые стоит прочесть',
-				status: 'done'
-			},
-			{
-				title: 'Сходить в кино',
-				description: 'Говорят последний фильм про нрчных снайперов очень хорошо',
-				status: 'new'
-			},
-			{
-				title: 'Слетать в Амстердам',
-				description: 'В это время года Амстердам особенно хорош',
-				status: 'new'
-			}
-		];
+	if ( ! angular.isUndefined( window.localStorage['tasks'] ) ) {
+		$scope.tasks = JSON.parse( window.localStorage['tasks'] );
+	} else {
+		$scope.tasks = [ { title: 'Купить чайник', description: 'Нужно обязательно купить синий', done: false }, { title: 'Выучить ангулар',	description: 'Есть еще парочка книг, которые стоит прочесть',	done: true }, {	title: 'Сходить в кино', description: 'Говорят последний фильм про нрчных снайперов очень хорошо', done: false }, {	title: 'Слетать в Амстердам', description: 'В это время года Амстердам особенно хорош', done: false } ];	
+	}
 
 	$scope.currentTaskId = -1;
 
 	$scope.activeTask = {
 					title: '',
 					description: '',
-					status: 'new'
+					done: false
 				};
 
 	// Create and load the Modal
@@ -59,14 +42,6 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 			animation: 'slide-in-right'
 		});
 
-	$scope.isChecked = function ( item ) {
-		return item.status == 'done';
-	}
-
-	$scope.toggleChecked = function ( item ) {
-		item.status = item.status == 'new' ? 'done' : 'new';
-	}
-
 	$scope.deleteItem = function( id ) {
 		$scope.tasks.splice( id, 1 );
 	}
@@ -76,7 +51,7 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 		$scope.activeTask = {
 					title: task.title,
 					description: task.description,
-					status: 'new'
+					done: $scope.tasks[id].done
 				};
 		$scope.currentTaskId = id;
 		$scope.taskModal.show();
@@ -86,7 +61,7 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 		$scope.activeTask = {
 					title: '',
 					description: '',
-					status: 'new'
+					done: false
 				};
 		$scope.currentTaskId = -1;
 		$scope.taskModal.show();
@@ -101,14 +76,16 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 			$scope.tasks.push({
 				title: task.title,
 				description: task.description,
-				status: 'new'
+				done: false
 			});
 		} else {
 			var id = $scope.currentTaskId;
 			$scope.tasks[id].title = task.title;
 			$scope.tasks[id].description = task.description;
+			$scope.tasks[id].done = task.done;
 		}
 		
+		window.localStorage['tasks'] = angular.toJson( $scope.tasks );
 
 		$scope.taskModal.hide();
 		task.title = "";

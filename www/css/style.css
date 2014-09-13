@@ -22,6 +22,10 @@
 	text-decoration: line-through;
 }
 
+.toggle-item {
+  color: #929292;
+}
+
 /*--------------- Animation ------------------*/
 
 .item.ng-enter-stagger {
