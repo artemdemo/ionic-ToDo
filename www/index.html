@@ -38,7 +38,7 @@
 						<label class="checkbox">
 							<input type="checkbox" ng-checked="isChecked(task)" ng-click="toggleChecked(task)">
 						</label>
-						<span class="title" ng-click="openTask(task)">{{task.title}}</span>
+						<span class="title" ng-click="openTask($index)">{{task.title}}</span>
 						<i class="icon ion-close-circled deleteItem" ng-click="deleteItem($index)"></i>
 					</ion-item>
 

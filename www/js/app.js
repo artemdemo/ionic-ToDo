@@ -14,6 +14,11 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 })
 
 .controller('ToDoCtrl', function( $scope, $ionicModal, $timeout ){
+	/*
+	 * in English:
+	 * $scope.tasks = [ {	title: 'Buy teapot', description: 'The blue one please', status: 'new' },	{	title: 'Learn angular', description: 'There is some interesting stuff',	status: 'done' }, {	title: 'Go to the cinema', description: 'The guardians of the galaxy', status: 'new' } ];
+	 */
+
 	$scope.tasks = [
 			{
 				title: 'Купить чайник',
@@ -36,6 +41,8 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 				status: 'new'
 			}
 		];
+
+	$scope.currentTaskId = -1;
 
 	$scope.activeTask = {
 					title: '',
@@ -64,14 +71,14 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 		$scope.tasks.splice( id, 1 );
 	}
 
-	$scope.openTask = function ( task ) {
-		console.log( task );
+	$scope.openTask = function ( id ) {
+		var task = $scope.tasks[id]
 		$scope.activeTask = {
 					title: task.title,
 					description: task.description,
 					status: 'new'
 				};
-		$scope.newTask = false;
+		$scope.currentTaskId = id;
 		$scope.taskModal.show();
 	}
 
@@ -81,7 +88,7 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 					description: '',
 					status: 'new'
 				};
-		$scope.newTask = true;
+		$scope.currentTaskId = -1;
 		$scope.taskModal.show();
 	}
 
@@ -90,11 +97,18 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 	}
 
 	$scope.submitTask = function(task) {
-		$scope.tasks.push({
-			title: task.title,
-			description: task.description,
-			status: 'new'
-		});
+		if ( $scope.currentTaskId == -1 ){
+			$scope.tasks.push({
+				title: task.title,
+				description: task.description,
+				status: 'new'
+			});
+		} else {
+			var id = $scope.currentTaskId;
+			$scope.tasks[id].title = task.title;
+			$scope.tasks[id].description = task.description;
+		}
+		
 
 		$scope.taskModal.hide();
 		task.title = "";

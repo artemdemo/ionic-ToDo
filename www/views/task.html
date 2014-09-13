@@ -13,15 +13,15 @@
 		<form ng-submit="submitTask(activeTask)">
 			<div class="list">
 				<label class="item item-input">
-					<input type="text" placeholder="Что нужно сделать?" ng-model="activeTask.title">
+					<input type="text" placeholder="Что запланировать?" ng-model="activeTask.title">
 				</label>
 				<label class="item item-input">
 					<textarea placeholder="Описание" ng-model="activeTask.description"></textarea>
 				</label>
 			</div>
 			<div class="padding">
-				<button type="submit" class="button button-block button-positive" ng-show="newTask">Создать задачу</button>
-				<button type="submit" class="button button-block button-positive" ng-hide="newTask">Сохранить задачу</button>
+				<button type="submit" class="button button-block button-positive" ng-show="newTask">Добавить</button>
+				<button type="submit" class="button button-block button-positive" ng-hide="newTask">Сохранить</button>
 			</div>
 		</form>
 

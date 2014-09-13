@@ -3,6 +3,16 @@
 	color: rgb(209, 35, 35);
 }
 
+.list .item-checkbox {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.list .item-checkbox .title {
+  padding: 16px 0;
+  display: block;
+}
+
 .item-checkbox .checkbox {
 	right: auto;
 }
