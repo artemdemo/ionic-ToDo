@@ -44,6 +44,7 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 
 	$scope.deleteItem = function( id ) {
 		$scope.tasks.splice( id, 1 );
+		saveItems();
 	}
 
 	$scope.openTask = function ( id ) {
@@ -84,11 +85,15 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 			$scope.tasks[id].description = task.description;
 			$scope.tasks[id].done = task.done;
 		}
-		
-		window.localStorage['tasks'] = angular.toJson( $scope.tasks );
+
+		saveItems();
 
 		$scope.taskModal.hide();
 		task.title = "";
 		task.description = "";
+	}
+
+	function saveItems() {
+		window.localStorage['tasks'] = angular.toJson( $scope.tasks );
 	}
 })
