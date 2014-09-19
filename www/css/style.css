@@ -28,7 +28,7 @@
 
 /*--------------- Animation ------------------*/
 
-.item.ng-enter-stagger {
+.item.animated.ng-enter-stagger {
 	/* notice how we're using animation instead of transition here */ 
 	-webkit-animation-delay:0.1s;
 	animation-delay:0.1s;
@@ -36,9 +36,20 @@
 	animation-duration:1.5s;
 }
 
-.item.ng-leave {
+.item.animated.ng-leave {
   -webkit-animation-duration: 1.5s;
           animation-duration: 1.5s;
+}
+
+.item.animated.ng-leave {
+  z-index: 100;
+  -webkit-animation-name: hinge;
+          animation-name: hinge;
+}
+
+.item.animated.ng-enter {
+  -webkit-animation-name: bounceInLeft;
+          animation-name: bounceInLeft;
 }
 
 @-webkit-keyframes hinge {
@@ -109,11 +120,6 @@
   }
 }
 
-.item.ng-leave {
-	z-index: 100;
-  -webkit-animation-name: hinge;
-          animation-name: hinge;
-}
 
 
 @-webkit-keyframes bounceInLeft {
@@ -184,7 +190,3 @@
   }
 }
 
-.item.ng-enter {
-  -webkit-animation-name: bounceInLeft;
-          animation-name: bounceInLeft;
-}
