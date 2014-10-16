@@ -1,4 +1,4 @@
-angular.module('ToDo', ['ionic', 'ngAnimate'])
+angular.module('ToDo', ['ionic'])
 
 .run(function($ionicPlatform) {
 	$ionicPlatform.ready(function() {
@@ -22,16 +22,15 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 	if ( ! angular.isUndefined( window.localStorage['tasks'] ) ) {
 		$scope.tasks = JSON.parse( window.localStorage['tasks'] );
 	} else {
-		$scope.tasks = [ { title: 'Купить чайник', description: 'Нужно обязательно купить синий', done: false }, { title: 'Выучить ангулар',	description: 'Есть еще парочка книг, которые стоит прочесть',	done: true }, {	title: 'Сходить в кино', description: 'Говорят последний фильм про нрчных снайперов очень хорошо', done: false }, {	title: 'Слетать в Амстердам', description: 'В это время года Амстердам особенно хорош', done: false } ];	
+		$scope.tasks = [
+			{ title: 'Купить чайник', description: 'Нужно обязательно купить синий', done: false },
+			{ title: 'Выучить ангулар',	description: 'Есть еще парочка книг, которые стоит прочесть',	done: true },
+			{	title: 'Сходить в кино', description: 'Говорят последний фильм про нрчных снайперов очень хорошо', done: false }, 
+			{	title: 'Слетать в Амстердам', description: 'В это время года Амстердам особенно хорош', done: false }
+		];	
 	}
 
 	$scope.currentTaskId = -1;
-
-	$scope.activeTask = {
-					title: '',
-					description: '',
-					done: false
-				};
 
 	// Create and load the Modal
 	$ionicModal.fromTemplateUrl('views/task.html', function(modal) {
@@ -91,6 +90,12 @@ angular.module('ToDo', ['ionic', 'ngAnimate'])
 		$scope.taskModal.hide();
 		task.title = "";
 		task.description = "";
+	}
+
+	$scope.saveTasks = function() {
+		$timeout(function(){
+			saveItems();
+		});
 	}
 
 	function saveItems() {
