@@ -93,9 +93,7 @@ angular.module('ToDo', ['ionic'])
 	}
 
 	$scope.saveTasks = function() {
-		$timeout(function(){
-			saveItems();
-		});
+		saveItems();
 	}
 
 	function saveItems() {

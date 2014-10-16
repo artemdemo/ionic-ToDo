@@ -36,7 +36,7 @@
 
 					<ion-item ng-repeat="task in tasks" class="item item-checkbox item-icon-right animated" ng-class="{'checked' : task.done}">
 						<label class="checkbox">
-							<input type="checkbox" ng-model="task.done" ng-click="saveTasks()" />
+							<input type="checkbox" ng-model="task.done" ng-change="saveTasks()" />
 						</label>
 						<span class="title" ng-click="openTask($index)">{{task.title}}</span>
 						<i class="icon ion-close-circled deleteItem" ng-click="deleteItem($index)"></i>
